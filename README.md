@@ -1,16 +1,56 @@
-# aika_ascend
+# Aika Ascend
 
-Gamified workout system inspired by Solo Leveling
+Aika Ascend is a gamified fitness app built with Flutter.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Daily quests and progression system
+- Achievement and title unlocks
+- Activity tracking (steps, movement state, distance, active time)
+- Challenges and progress stats
+- Local-first data storage with Hive
 
-A few resources to get you started if this is your first Flutter project:
+## Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter (Dart)
+- Hive
+- geolocator, pedometer, permission_handler
+- fl_chart
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Quick Start
+
+1. Install dependencies
+
+```bash
+flutter pub get
+```
+
+2. Generate model files (when needed)
+
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
+
+3. Run the app
+
+```bash
+flutter run
+```
+
+## Common Commands
+
+```bash
+flutter analyze
+flutter test
+flutter clean
+```
+
+## Notes
+
+- Data is stored locally using Hive.
+- App content is loaded from `assets/data/`.
+- Activity tracking works best on Android devices with required permissions enabled.
+
+## License
+
+No license file is currently included.
