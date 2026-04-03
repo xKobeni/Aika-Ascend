@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../core/app_colors.dart';
-import '../models/user_model.dart';
 import '../widgets/animated_background.dart';
 import '../services/content_service.dart';
 import '../services/achievement_service.dart';
@@ -232,6 +231,13 @@ class _ChallengesScreenState extends State<ChallengesScreen>
   }
 
   int _isoWeek(DateTime date) {
+    final settings = _storage.getAppSettings();
+    final weekStartsMonday = (settings['weekStartsMonday'] as bool?) ?? true;
+    if (!weekStartsMonday) {
+      final dayOfYear = date.difference(DateTime(date.year, 1, 1)).inDays + 1;
+      final sundayWeekday = date.weekday % 7;
+      return ((dayOfYear - sundayWeekday + 10) / 7).floor();
+    }
     final dayOfYear = date.difference(DateTime(date.year, 1, 1)).inDays + 1;
     return ((dayOfYear - date.weekday + 10) / 7).floor();
   }
@@ -298,6 +304,32 @@ class _ChallengesScreenState extends State<ChallengesScreen>
   }
 
   Widget _buildWorkoutTab(List<Map<String, dynamic>> workouts) {
+    final settings = _storage.getAppSettings();
+    final preferredFocus = (settings['workoutFocus'] as String?) ?? 'any';
+    final preferredMinutes = (settings['workoutSessionMinutes'] as num?)?.toInt() ?? 0;
+    final equipmentMode = (settings['equipmentMode'] as String?) ?? 'bodyweight';
+
+    final filteredWorkouts = workouts.where((item) {
+      final focus = ((item['focus'] as String?) ?? '').toLowerCase();
+      final title = ((item['title'] as String?) ?? '').toLowerCase();
+      final duration = (item['duration_minutes'] as num?)?.toInt() ?? 0;
+      final equipmentMatches = _matchesEquipmentMode(equipmentMode, item);
+
+      final durationMatches = preferredMinutes <= 0 || duration <= preferredMinutes;
+      final focusMatches = _matchesWorkoutFocus(preferredFocus, focus, title);
+      return durationMatches && focusMatches && equipmentMatches;
+    }).toList();
+
+    if (filteredWorkouts.isEmpty) {
+      return Center(
+        child: Text(
+          'No workouts match your settings.\nChange Workout Focus or Session Length in Settings.',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.shareTechMono(color: AppColors.textMuted),
+        ),
+      );
+    }
+
     if (workouts.isEmpty) {
       return Center(
         child: Text(
@@ -307,7 +339,7 @@ class _ChallengesScreenState extends State<ChallengesScreen>
       );
     }
 
-    final workout = workouts[_selectedWorkoutIndex.clamp(0, workouts.length - 1)];
+    final workout = filteredWorkouts[_selectedWorkoutIndex.clamp(0, filteredWorkouts.length - 1)];
     final exercises = List<Map<String, dynamic>>.from(workout['exercises'] as List);
 
     final totalSets = exercises.fold<int>(0, (sum, e) => sum + (e['sets'] as int));
@@ -324,10 +356,10 @@ class _ChallengesScreenState extends State<ChallengesScreen>
           height: 126,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: workouts.length,
+            itemCount: filteredWorkouts.length,
             separatorBuilder: (_, __) => const SizedBox(width: 10),
             itemBuilder: (_, i) {
-              final item = workouts[i];
+              final item = filteredWorkouts[i];
               final active = i == _selectedWorkoutIndex;
               return GestureDetector(
                 onTap: () => setState(() => _selectedWorkoutIndex = i),
@@ -490,6 +522,33 @@ class _ChallengesScreenState extends State<ChallengesScreen>
         ),
       ],
     );
+  }
+
+  bool _matchesWorkoutFocus(String pref, String focus, String title) {
+    if (pref == 'any') return true;
+    if (pref == 'upper') return focus.contains('upper') || title.contains('upper');
+    if (pref == 'lower') return focus.contains('lower') || focus.contains('leg') || title.contains('lower');
+    if (pref == 'core') return focus.contains('core') || title.contains('core');
+    if (pref == 'full') return focus.contains('full body') || title.contains('full body');
+    if (pref == 'endurance') return focus.contains('endurance') || focus.contains('cardio') || title.contains('endurance');
+    if (pref == 'stamina') return focus.contains('stamina') || title.contains('stamina');
+    return true;
+  }
+
+  bool _matchesEquipmentMode(String mode, Map<String, dynamic> workout) {
+    if (mode == 'home_gym') return true;
+    final exercises = (workout['exercises'] as List?)?.whereType<Map>() ?? const [];
+    const gymKeywords = ['dumbbell', 'barbell', 'kettlebell', 'bench', 'machine'];
+    for (final exercise in exercises) {
+      final name = (exercise['name'] ?? '').toString().toLowerCase();
+      final muscles = (exercise['target_muscles'] ?? '').toString().toLowerCase();
+      for (final key in gymKeywords) {
+        if (name.contains(key) || muscles.contains(key)) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   Widget _buildTransformationTab() {

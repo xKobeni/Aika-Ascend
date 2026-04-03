@@ -16,7 +16,7 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   int _index = 0;
 
-  static const _screens = [
+  List<Widget> get _screens => [
     HomeScreen(),
     ChallengesScreen(),
     StatsScreen(),

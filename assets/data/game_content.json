@@ -23,9 +23,11 @@
     {"title": "L-Sit Hold", "baseTarget": 20, "category": "discipline", "isTimedQuest": true}
   ],
   "punishment_quests": [
-    {"title": "Punishment: Burpee Gauntlet", "baseTarget": 30, "category": "cardio", "isTimedQuest": false},
-    {"title": "Punishment: Squat Hold", "baseTarget": 90, "category": "discipline", "isTimedQuest": true},
-    {"title": "Punishment: Push-up Grind", "baseTarget": 40, "category": "strength", "isTimedQuest": false}
+    {"kind": "reps", "exercise": "Push-ups", "baseTarget": 50, "category": "strength", "isTimedQuest": false},
+    {"kind": "timed", "exercise": "Plank Hold", "baseTarget": 90, "category": "discipline", "isTimedQuest": true},
+    {"kind": "reps", "exercise": "Sit-ups", "baseTarget": 60, "category": "strength", "isTimedQuest": false},
+    {"kind": "distance", "exercise": "Run 5 KM", "baseTarget": 5, "category": "cardio", "isTimedQuest": false},
+    {"kind": "distance", "exercise": "Run 10 KM", "baseTarget": 10, "category": "cardio", "isTimedQuest": false}
   ],
   "boss_quest_title": "BOSS RAID: Total Annihilation",
   "titles": [
@@ -134,6 +136,78 @@
         {"name": "Burpees", "target_muscles": "Full body", "sets": 4, "reps": "12-15", "rest_seconds": 75},
         {"name": "Mountain Climbers", "target_muscles": "Core, shoulders", "sets": 4, "reps": "40", "rest_seconds": 45},
         {"name": "High Knees", "target_muscles": "Hip flexors, quads", "sets": 4, "reps": "60 sec", "rest_seconds": 45}
+      ]
+    },
+    {
+      "id": "wk_upper_body_45",
+      "title": "45-Minute Upper Body Assault",
+      "duration_minutes": 45,
+      "focus": "Chest, shoulders, triceps",
+      "exercises": [
+        {"name": "Push-ups", "target_muscles": "Chest, shoulders, triceps", "sets": 5, "reps": "15", "rest_seconds": 45},
+        {"name": "Dips", "target_muscles": "Triceps, chest", "sets": 4, "reps": "12", "rest_seconds": 60},
+        {"name": "Pike Push-ups", "target_muscles": "Shoulders, upper chest", "sets": 4, "reps": "10", "rest_seconds": 60},
+        {"name": "Diamond Push-ups", "target_muscles": "Triceps, inner chest", "sets": 3, "reps": "10", "rest_seconds": 45}
+      ]
+    },
+    {
+      "id": "wk_lower_body_45",
+      "title": "45-Minute Lower Body Forge",
+      "duration_minutes": 45,
+      "focus": "Legs, glutes, calves",
+      "exercises": [
+        {"name": "Squats", "target_muscles": "Quads, glutes", "sets": 5, "reps": "20", "rest_seconds": 60},
+        {"name": "Lunges", "target_muscles": "Glutes, quads, hamstrings", "sets": 4, "reps": "12 each leg", "rest_seconds": 60},
+        {"name": "Jump Squats", "target_muscles": "Glutes, quads, calves", "sets": 4, "reps": "15", "rest_seconds": 45},
+        {"name": "Wall Sit", "target_muscles": "Quads, glutes", "sets": 3, "reps": "60 sec", "rest_seconds": 45}
+      ]
+    },
+    {
+      "id": "wk_core_30",
+      "title": "30-Minute Core Crucible",
+      "duration_minutes": 30,
+      "focus": "Abs, obliques, stability",
+      "exercises": [
+        {"name": "Plank Hold", "target_muscles": "Core", "sets": 4, "reps": "45 sec", "rest_seconds": 30},
+        {"name": "Sit-ups", "target_muscles": "Abs", "sets": 4, "reps": "20", "rest_seconds": 30},
+        {"name": "Mountain Climbers", "target_muscles": "Core, shoulders", "sets": 4, "reps": "40", "rest_seconds": 30},
+        {"name": "L-Sit Hold", "target_muscles": "Core, hip flexors", "sets": 3, "reps": "20 sec", "rest_seconds": 30}
+      ]
+    },
+    {
+      "id": "wk_full_body_50",
+      "title": "50-Minute Full Body Gauntlet",
+      "duration_minutes": 50,
+      "focus": "Strength, cardio, core",
+      "exercises": [
+        {"name": "Burpees", "target_muscles": "Full body", "sets": 4, "reps": "12", "rest_seconds": 60},
+        {"name": "Push-ups", "target_muscles": "Chest, shoulders, triceps", "sets": 4, "reps": "15", "rest_seconds": 45},
+        {"name": "Squats", "target_muscles": "Quads, glutes", "sets": 4, "reps": "20", "rest_seconds": 45},
+        {"name": "High Knees", "target_muscles": "Hip flexors, quads", "sets": 4, "reps": "60 sec", "rest_seconds": 30}
+      ]
+    },
+    {
+      "id": "wk_endurance_40",
+      "title": "40-Minute Endurance Engine",
+      "duration_minutes": 40,
+      "focus": "Cardio capacity",
+      "exercises": [
+        {"name": "Jump Rope", "target_muscles": "Calves, shoulders, cardio", "sets": 5, "reps": "90 sec", "rest_seconds": 30},
+        {"name": "Jumping Jacks", "target_muscles": "Cardio, shoulders", "sets": 4, "reps": "50", "rest_seconds": 30},
+        {"name": "Burpees", "target_muscles": "Full body", "sets": 4, "reps": "10", "rest_seconds": 45},
+        {"name": "Mountain Climbers", "target_muscles": "Core, shoulders", "sets": 4, "reps": "40", "rest_seconds": 30}
+      ]
+    },
+    {
+      "id": "wk_stamina_35",
+      "title": "35-Minute Stamina Run",
+      "duration_minutes": 35,
+      "focus": "Aerobic stamina",
+      "exercises": [
+        {"name": "Run Intervals", "target_muscles": "Legs, lungs", "sets": 6, "reps": "3 min", "rest_seconds": 60},
+        {"name": "High Knees", "target_muscles": "Hip flexors, quads", "sets": 4, "reps": "45 sec", "rest_seconds": 30},
+        {"name": "Jump Rope", "target_muscles": "Calves, cardio", "sets": 4, "reps": "90 sec", "rest_seconds": 30},
+        {"name": "Fast Walk Recovery", "target_muscles": "Legs, cardio", "sets": 3, "reps": "2 min", "rest_seconds": 30}
       ]
     },
     {

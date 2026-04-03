@@ -25,10 +25,11 @@ class TitleBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Wrap(
+      spacing: 8,
+      runSpacing: 6,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        // Level badge
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           decoration: BoxDecoration(
@@ -46,10 +47,9 @@ class TitleBadge extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 8),
-        // Title badge
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+          constraints: const BoxConstraints(maxWidth: 190),
           decoration: BoxDecoration(
             color: _color.withValues(alpha: 0.10),
             border: Border.all(color: _color.withValues(alpha: 0.7), width: 1),
@@ -64,6 +64,8 @@ class TitleBadge extends StatelessWidget {
           ),
           child: Text(
             _titleName.toUpperCase(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: GoogleFonts.rajdhani(
               color: _color,
               fontSize: 12,

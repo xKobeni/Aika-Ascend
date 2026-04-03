@@ -4,32 +4,45 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 import '../core/app_colors.dart';
 import '../models/daily_log_model.dart';
+import '../services/settings_view_service.dart';
 import '../services/storage_service.dart';
+import '../widgets/activity_tracker_panel.dart';
 import '../widgets/animated_background.dart';
 
-class StatsScreen extends StatelessWidget {
+class StatsScreen extends StatefulWidget {
   const StatsScreen({super.key});
 
   @override
+  State<StatsScreen> createState() => _StatsScreenState();
+}
+
+class _StatsScreenState extends State<StatsScreen> {
+  @override
   Widget build(BuildContext context) {
     final storage = StorageService();
-    final user = storage.getUser();
-    final logs = storage.getLastNLogs(7);
-    final todayKey = DateFormat('yyyy-MM-dd').format(DateTime.now());
-    final todayLog = storage.getDailyLogs().cast<DailyLogModel?>().firstWhere(
-      (log) => log?.date == todayKey,
-      orElse: () => null,
-    );
+    return StreamBuilder<void>(
+      stream: storage.changes,
+      initialData: null,
+      builder: (context, _) {
+        final settings = storage.getAppSettings();
+        final compactCards = (settings['compactCards'] as bool?) ?? false;
+        final user = storage.getUser();
+        final logs = storage.getLastNLogs(7);
+        final todayKey = DateFormat('yyyy-MM-dd').format(DateTime.now());
+        final todayLog = storage.getDailyLogs().cast<DailyLogModel?>().firstWhere(
+          (log) => log?.date == todayKey,
+          orElse: () => null,
+        );
 
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: AnimatedBackground(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          body: AnimatedBackground(
+            child: SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
               const SizedBox(height: 8),
               Text('STATISTICS', style: GoogleFonts.rajdhani(
                 color: AppColors.textPrimary, fontSize: 28,
@@ -45,9 +58,9 @@ class StatsScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 1.5,
+                crossAxisSpacing: compactCards ? 10 : 12,
+                mainAxisSpacing: compactCards ? 10 : 12,
+                childAspectRatio: compactCards ? 1.7 : 1.5,
                 children: [
                   _statCard('LEVEL', '${user.level}', AppColors.violet, Icons.trending_up),
                   _statCard('STREAK', '${user.streak}d', AppColors.gold, Icons.local_fire_department),
@@ -57,6 +70,12 @@ class StatsScreen extends StatelessWidget {
                   _statCard('BOSS WINS', '${user.bossDefeatsTotal}', AppColors.gold, Icons.shield),
                 ],
               ),
+
+              const SizedBox(height: 20),
+
+              _sectionHeader('DAILY OFFLINE ACTIVITY TRACKER'),
+              const SizedBox(height: 12),
+              const ActivityTrackerPanel(),
 
               const SizedBox(height: 20),
 
@@ -116,12 +135,17 @@ class StatsScreen extends StatelessWidget {
                                 'PACE',
                                 todayLog.distanceMeters < 10 || todayLog.activeMinutes <= 0
                                     ? '--'
-                                    : '${(todayLog.activeMinutes / (todayLog.distanceMeters / 1000)).toStringAsFixed(1)} min/km',
+                                    : SettingsViewService.paceLabel(todayLog.activeMinutes / (todayLog.distanceMeters / 1000)),
                                 AppColors.gold,
                                 Icons.speed,
                               ),
                               _statCard('STEPS', '${todayLog.steps}', AppColors.cyan, Icons.directions_walk),
-                              _statCard('DISTANCE', '${(todayLog.distanceMeters / 1000).toStringAsFixed(2)} km', AppColors.violet, Icons.route),
+                              _statCard(
+                                'DISTANCE',
+                                '${SettingsViewService.distanceDisplayValue(todayLog.distanceMeters).toStringAsFixed(2)} ${SettingsViewService.distanceUnitLabel()}',
+                                AppColors.violet,
+                                Icons.route,
+                              ),
                               _statCard('ASCENT', '${todayLog.elevationGainMeters.toStringAsFixed(0)} m', AppColors.emerald, Icons.terrain),
                             ],
                           ),
@@ -285,18 +309,34 @@ class StatsScreen extends StatelessWidget {
               ] else ...[
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
                     color: AppColors.surface,
                     border: Border.all(color: AppColors.cardBorder),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: Text(
-                    'No history yet.\nComplete your first daily missions.',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.shareTechMono(
-                      color: AppColors.textMuted, fontSize: 11, height: 1.8,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'No history yet.',
+                        style: GoogleFonts.rajdhani(
+                          color: AppColors.textPrimary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Complete daily missions or start the offline tracker to generate stats here.',
+                        style: GoogleFonts.shareTechMono(
+                          color: AppColors.textMuted,
+                          fontSize: 10,
+                          height: 1.6,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -351,9 +391,11 @@ class StatsScreen extends StatelessWidget {
               const SizedBox(height: 32),
             ],
           ),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 

@@ -3,14 +3,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
-  static ThemeData get dark {
+  static ThemeData dark({bool highContrast = false}) {
     final base = ThemeData.dark();
+    final background = highContrast ? const Color(0xFF000000) : AppColors.background;
+    final surface = highContrast ? const Color(0xFF0B0B0B) : AppColors.surface;
+    final primary = highContrast ? const Color(0xFF8EA2FF) : AppColors.violet;
+    final secondary = highContrast ? const Color(0xFF79F6FF) : AppColors.cyan;
+    final border = highContrast ? Colors.white70 : AppColors.cardBorder;
+
     return base.copyWith(
-      scaffoldBackgroundColor: AppColors.background,
-      colorScheme: const ColorScheme.dark(
-        primary: AppColors.violet,
-        secondary: AppColors.cyan,
-        surface: AppColors.surface,
+      scaffoldBackgroundColor: background,
+      colorScheme: ColorScheme.dark(
+        primary: primary,
+        secondary: secondary,
+        surface: surface,
         error: AppColors.crimson,
       ),
       textTheme: TextTheme(
@@ -49,7 +55,7 @@ class AppTheme {
         ),
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.background,
+        backgroundColor: background,
         elevation: 0,
         titleTextStyle: GoogleFonts.rajdhani(
           color: AppColors.textPrimary, fontSize: 18,
@@ -59,7 +65,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.violet,
+          backgroundColor: primary,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
@@ -69,23 +75,23 @@ class AppTheme {
         ),
       ),
       cardTheme: CardThemeData(
-        color: AppColors.cardBg,
+        color: surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
-          side: const BorderSide(color: AppColors.cardBorder),
+          side: BorderSide(color: border),
         ),
       ),
-      dividerColor: AppColors.cardBorder,
+      dividerColor: border,
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: AppColors.surface,
-        indicatorColor: AppColors.violet.withValues(alpha: 0.2),
+        backgroundColor: surface,
+        indicatorColor: primary.withValues(alpha: 0.2),
         labelTextStyle: WidgetStateProperty.all(
           GoogleFonts.rajdhani(fontSize: 11, letterSpacing: 1.3),
         ),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return const IconThemeData(color: AppColors.violet, size: 22);
+            return IconThemeData(color: primary, size: 22);
           }
           return const IconThemeData(color: AppColors.textMuted, size: 22);
         }),

@@ -9,6 +9,7 @@ import '../services/storage_service.dart';
 import '../services/behavior_service.dart';
 import '../services/system_service.dart';
 import '../services/content_service.dart';
+import '../services/reminder_service.dart';
 import '../widgets/exp_bar.dart';
 import '../widgets/quest_card.dart';
 import '../widgets/system_panel.dart';
@@ -31,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final StorageService _storage = StorageService();
   final BehaviorService _behavior = BehaviorService();
   final ContentService _content = ContentService.instance;
+  final ReminderService _reminderService = ReminderService();
 
   late UserModel _user;
   List<QuestModel> _quests = [];
@@ -75,11 +77,25 @@ class _HomeScreenState extends State<HomeScreen> {
           await SystemService.achievementUnlocked(context, id);
           if (!mounted) return;
         }
+
+        await _reminderService.checkAndTrigger(
+          context,
+          hasPendingPunishment: _quests.any((q) => q.isPunishment && !q.completed),
+        );
+      });
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (!mounted) return;
+        await _reminderService.checkAndTrigger(
+          context,
+          hasPendingPunishment: _quests.any((q) => q.isPunishment && !q.completed),
+        );
       });
     }
   }
 
   Future<void> _handleComplete(int index) async {
+    final completedReward = _quests[index].expReward;
     final result = await _questService.completeQuest(index);
 
     setState(() {
@@ -91,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (result.allCompleted) {
       await SystemService.allQuestsCompleted(context);
     } else {
-      await SystemService.questCompleted(context, _quests[index].expReward);
+      await SystemService.questCompleted(context, completedReward);
     }
 
     if (!mounted) return;
@@ -109,6 +125,14 @@ class _HomeScreenState extends State<HomeScreen> {
   int get _done => _quests.where((q) => q.completed).length;
   double get _progress => _quests.isEmpty ? 0 : _done / _quests.length;
   bool get _allDone => _quests.isNotEmpty && _quests.every((q) => q.completed);
+  QuestModel? get _activePunishment {
+    for (final quest in _quests) {
+      if (quest.isPunishment && !quest.completed) {
+        return quest;
+      }
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +181,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (_activeEvent.isNotEmpty) ...[
                       const SizedBox(height: 12),
                       _buildEventBanner(),
+                    ],
+                    if (_activePunishment != null) ...[
+                      const SizedBox(height: 12),
+                      _buildPunishmentBanner(_activePunishment!),
                     ],
                     const SizedBox(height: 16),
                     SystemPanel(
@@ -384,6 +412,77 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: AppColors.textMuted, fontSize: 10, height: 1.5,
                 )),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPunishmentBanner(QuestModel quest) {
+    final color = AppColors.crimson;
+    final status = quest.isTimedQuest ? 'HOLD UNTIL COMPLETE' : 'COMPLETE TO RELEASE';
+
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.10),
+        border: Border.all(color: color.withValues(alpha: 0.65)),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.report_gmailerrorred_rounded, color: color, size: 18),
+              const SizedBox(width: 8),
+              Text(
+                'ACTIVE PUNISHMENT',
+                style: GoogleFonts.rajdhani(
+                  color: color,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                status,
+                style: GoogleFonts.shareTechMono(
+                  color: color.withValues(alpha: 0.9),
+                  fontSize: 9,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            quest.title.toUpperCase(),
+            style: GoogleFonts.rajdhani(
+              color: AppColors.textPrimary,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'This punishment stays on screen until the task is cleared.',
+            style: GoogleFonts.shareTechMono(
+              color: AppColors.textMuted,
+              fontSize: 10,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            '${quest.progress}/${quest.target}',
+            style: GoogleFonts.shareTechMono(
+              color: color,
+              fontSize: 12,
+              letterSpacing: 1.2,
             ),
           ),
         ],

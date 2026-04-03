@@ -54,9 +54,11 @@ class AppConstants {
 
   // ── Punishment Quests ────────────────────────────────────────────────────────
   static const List<Map<String, dynamic>> punishmentQuests = [
-    {'title': 'Punishment: Burpee Gauntlet', 'baseTarget': 30, 'category': 'cardio', 'isTimedQuest': false},
-    {'title': 'Punishment: Squat Hold', 'baseTarget': 90, 'category': 'discipline', 'isTimedQuest': true},
-    {'title': 'Punishment: Push-up Grind', 'baseTarget': 40, 'category': 'strength', 'isTimedQuest': false},
+    {'kind': 'reps', 'exercise': 'Push-ups', 'baseTarget': 50, 'category': 'strength', 'isTimedQuest': false},
+    {'kind': 'timed', 'exercise': 'Plank Hold', 'baseTarget': 90, 'category': 'discipline', 'isTimedQuest': true},
+    {'kind': 'reps', 'exercise': 'Sit-ups', 'baseTarget': 60, 'category': 'strength', 'isTimedQuest': false},
+    {'kind': 'distance', 'exercise': 'Run 5 KM', 'baseTarget': 5, 'category': 'cardio', 'isTimedQuest': false},
+    {'kind': 'distance', 'exercise': 'Run 10 KM', 'baseTarget': 10, 'category': 'cardio', 'isTimedQuest': false},
   ];
 
   // ── Boss Quest ───────────────────────────────────────────────────────────────

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/user_model.dart';
 import '../models/quest_model.dart';
@@ -12,10 +14,27 @@ class StorageService {
   late Box<AchievementModel> _achievementBox;
   late Box<DailyLogModel> _dailyLogBox;
   late Box _challengeBox;
+  final StreamController<void> _changeController = StreamController<void>.broadcast();
+  final StreamController<void> _settingsChangeController = StreamController<void>.broadcast();
 
   static final StorageService _instance = StorageService._internal();
   factory StorageService() => _instance;
   StorageService._internal();
+
+  Stream<void> get changes => _changeController.stream;
+  Stream<void> get settingsChanges => _settingsChangeController.stream;
+
+  void _notifyChange() {
+    if (!_changeController.isClosed) {
+      _changeController.add(null);
+    }
+  }
+
+  void _notifySettingsChange() {
+    if (!_settingsChangeController.isClosed) {
+      _settingsChangeController.add(null);
+    }
+  }
 
   Future<void> init() async {
     await Hive.initFlutter();
@@ -60,7 +79,10 @@ class StorageService {
     return _userBox.get('user')!;
   }
 
-  Future<void> saveUser(UserModel user) async => _userBox.put('user', user);
+  Future<void> saveUser(UserModel user) async {
+    await _userBox.put('user', user);
+    _notifyChange();
+  }
 
   // ── Quests ────────────────────────────────────────────────────────────────
   List<QuestModel> getQuests() => _questBox.values.toList();
@@ -70,10 +92,11 @@ class StorageService {
     for (var i = 0; i < quests.length; i++) {
       await _questBox.put(i, quests[i]);
     }
+    _notifyChange();
   }
 
   Future<void> updateQuest(int index, QuestModel quest) async =>
-      _questBox.put(index, quest);
+      _questBox.put(index, quest).then((_) => _notifyChange());
 
   // ── Achievements ──────────────────────────────────────────────────────────
   List<AchievementModel> getAchievements() => _achievementBox.values.toList();
@@ -88,6 +111,7 @@ class StorageService {
       a.unlockedDate =
           '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
       await _achievementBox.put(id, a);
+      _notifyChange();
     }
   }
 
@@ -98,10 +122,12 @@ class StorageService {
     final existing = _dailyLogBox.get(log.date);
     if (existing == null) {
       await _dailyLogBox.put(log.date, log);
+      _notifyChange();
       return;
     }
 
     await _dailyLogBox.put(log.date, _mergeDailyLogs(existing, log));
+    _notifyChange();
   }
 
   DailyLogModel _mergeDailyLogs(DailyLogModel existing, DailyLogModel incoming) {
@@ -140,6 +166,7 @@ class StorageService {
 
   Future<void> saveTransformation(Map<String, dynamic> value) async {
     await _challengeBox.put('transformation', value);
+    _notifyChange();
   }
 
   List<Map<String, dynamic>> getChallengeCheckins() {
@@ -157,6 +184,7 @@ class StorageService {
     final logs = getChallengeCheckins();
     logs.add(checkin);
     await _challengeBox.put('checkins', logs);
+    _notifyChange();
   }
 
   Map<String, dynamic> getBossRaidState() {
@@ -180,9 +208,75 @@ class StorageService {
 
   Future<void> saveBossRaidState(Map<String, dynamic> value) async {
     await _challengeBox.put('bossRaid', value);
+    _notifyChange();
   }
 
   Future<void> clearBossRaidState() async {
     await _challengeBox.delete('bossRaid');
+    _notifyChange();
+  }
+
+  // ── App Settings ─────────────────────────────────────────────────────────
+  Map<String, dynamic> getAppSettings() {
+    final data = _challengeBox.get('appSettings');
+    if (data is Map) {
+      final merged = Map<String, dynamic>.from(_defaultAppSettings())
+        ..addAll(Map<String, dynamic>.from(data));
+      return merged;
+    }
+    return _defaultAppSettings();
+  }
+
+  Future<void> saveAppSettings(Map<String, dynamic> value) async {
+    await _challengeBox.put('appSettings', value);
+    _notifySettingsChange();
+    _notifyChange();
+  }
+
+  Future<void> updateAppSetting(String key, dynamic value) async {
+    final settings = getAppSettings();
+    settings[key] = value;
+    await saveAppSettings(settings);
+  }
+
+  Map<String, dynamic> _defaultAppSettings() {
+    return {
+      'reminderMorningEnabled': true,
+      'reminderMorningTime': '07:00',
+      'reminderEveningEnabled': true,
+      'reminderEveningTime': '20:00',
+      'missedDayWarningEnabled': true,
+      'lastMorningReminderDate': '',
+      'lastEveningReminderDate': '',
+      'lastMissedWarningDate': '',
+      'quietHoursEnabled': false,
+      'quietHoursStart': '22:00',
+      'quietHoursEnd': '06:00',
+      'punishmentIntensity': 'standard',
+      'punishmentAllowedKinds': ['reps', 'timed', 'distance'],
+      'punishmentHighImpactEnabled': true,
+      'workoutFocus': 'any',
+      'workoutSessionMinutes': 0,
+      'equipmentMode': 'bodyweight',
+      'trackerAutoStart': false,
+      'trackerGpsMode': 'balanced',
+      'trackerBackgroundEnabled': false,
+      'trackerStepGoal': 8000,
+      'trackerDistanceGoalKm': 5.0,
+      'useMetricUnits': true,
+      'use24HourTime': true,
+      'weekStartsMonday': true,
+      'notificationsEnabled': true,
+      'popupMessagesEnabled': true,
+      'soundEffectsEnabled': true,
+      'vibrationEnabled': true,
+      'offlineOnlyMode': true,
+      'fontScale': 1.0,
+      'highContrastMode': false,
+      'reducedMotion': false,
+      'compactCards': false,
+      'adaptiveDifficultyEnabled': true,
+      'confirmPathSwitch': true,
+    };
   }
 }

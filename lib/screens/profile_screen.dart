@@ -9,6 +9,7 @@ import '../widgets/progress_ring.dart';
 import '../widgets/title_badge.dart';
 import '../widgets/animated_background.dart';
 import 'onboarding_screen.dart';
+import 'settings_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -23,6 +24,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _changePath(int newPath) async {
     final user = _storage.getUser();
+    final settings = _storage.getAppSettings();
+    final shouldConfirm = (settings['confirmPathSwitch'] as bool?) ?? true;
     if (user.skillPath == newPath) return;
 
     final cost = AppConstants.skillPathChangePenalty;
@@ -38,38 +41,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
       return;
     }
 
-    final confirm = await showDialog<bool>(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-          side: const BorderSide(color: AppColors.violet),
-        ),
-        title: Text('CHANGE PATH', style: GoogleFonts.rajdhani(
-          color: AppColors.violet, fontSize: 18,
-          fontWeight: FontWeight.bold, letterSpacing: 2,
-        )),
-        content: Text(
-          'Switching paths costs $cost EXP.\n\nContinue?',
-          style: GoogleFonts.shareTechMono(color: AppColors.textMuted, fontSize: 11),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text('CANCEL', style: GoogleFonts.rajdhani(
-              color: AppColors.textMuted, letterSpacing: 1.5,
-            )),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: Text('CONFIRM', style: GoogleFonts.rajdhani(
-              color: AppColors.violet, letterSpacing: 1.5,
-            )),
-          ),
-        ],
-      ),
-    );
+    final confirm = shouldConfirm
+        ? await showDialog<bool>(
+            context: context,
+            builder: (_) => AlertDialog(
+              backgroundColor: AppColors.surface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+                side: const BorderSide(color: AppColors.violet),
+              ),
+              title: Text('CHANGE PATH', style: GoogleFonts.rajdhani(
+                color: AppColors.violet, fontSize: 18,
+                fontWeight: FontWeight.bold, letterSpacing: 2,
+              )),
+              content: Text(
+                'Switching paths costs $cost EXP.\n\nContinue?',
+                style: GoogleFonts.shareTechMono(color: AppColors.textMuted, fontSize: 11),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  child: Text('CANCEL', style: GoogleFonts.rajdhani(
+                    color: AppColors.textMuted, letterSpacing: 1.5,
+                  )),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: Text('CONFIRM', style: GoogleFonts.rajdhani(
+                    color: AppColors.violet, letterSpacing: 1.5,
+                  )),
+                ),
+              ],
+            ),
+          )
+        : true;
 
     if (confirm != true) return;
 
@@ -291,6 +296,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
               }),
 
               const SizedBox(height: 20),
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  decoration: BoxDecoration(
+                    color: AppColors.violet.withValues(alpha: 0.08),
+                    border: Border.all(color: AppColors.violet.withValues(alpha: 0.45)),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    '[ OPEN SETTINGS ]',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.rajdhani(
+                      color: AppColors.violet,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2.3,
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 16),
 
               // ── Danger Zone ──────────────────────────────────────────────
               _sectionLabel('DANGER ZONE'),

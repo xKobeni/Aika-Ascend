@@ -114,10 +114,21 @@ class ActivityTrackingService {
     );
 
     if (locationAllowed) {
+      final gpsMode = (StorageService().getAppSettings()['trackerGpsMode'] as String?) ?? 'balanced';
+      LocationAccuracy accuracy = LocationAccuracy.medium;
+      int distanceFilter = 10;
+      if (gpsMode == 'battery') {
+        accuracy = LocationAccuracy.low;
+        distanceFilter = 25;
+      } else if (gpsMode == 'precise') {
+        accuracy = LocationAccuracy.bestForNavigation;
+        distanceFilter = 5;
+      }
+
       _positionSubscription = Geolocator.getPositionStream(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.bestForNavigation,
-          distanceFilter: 5,
+        locationSettings: LocationSettings(
+          accuracy: accuracy,
+          distanceFilter: distanceFilter,
         ),
       ).listen(
         _handlePosition,

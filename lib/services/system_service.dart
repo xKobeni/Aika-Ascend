@@ -1,12 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/app_colors.dart';
 import '../core/constants.dart';
 import 'content_service.dart';
+import 'storage_service.dart';
 
 enum SystemMessageType { success, failure, levelUp, punishment, info, achievement, boss, event }
 
 class SystemService {
+  static final StorageService _storage = StorageService();
+
+  static bool _isWithinQuietHours(Map<String, dynamic> settings) {
+    final enabled = (settings['quietHoursEnabled'] as bool?) ?? false;
+    if (!enabled) return false;
+
+    final start = (settings['quietHoursStart'] as String?) ?? '22:00';
+    final end = (settings['quietHoursEnd'] as String?) ?? '06:00';
+
+    int toMinutes(String value) {
+      final parts = value.split(':');
+      final h = int.tryParse(parts.first) ?? 0;
+      final m = int.tryParse(parts.length > 1 ? parts[1] : '0') ?? 0;
+      return h * 60 + m;
+    }
+
+    final now = DateTime.now();
+    final nowMinutes = now.hour * 60 + now.minute;
+    final startMinutes = toMinutes(start);
+    final endMinutes = toMinutes(end);
+
+    if (startMinutes <= endMinutes) {
+      return nowMinutes >= startMinutes && nowMinutes < endMinutes;
+    }
+
+    return nowMinutes >= startMinutes || nowMinutes < endMinutes;
+  }
+
   // ── Shared animated dialog ──────────────────────────────────────────────
   static Future<void> show(
     BuildContext context, {
@@ -15,20 +45,42 @@ class SystemService {
     required String message,
     String? subMessage,
   }) async {
+    final settings = _storage.getAppSettings();
+    final notificationsEnabled = (settings['notificationsEnabled'] as bool?) ?? true;
+    final popupsEnabled = (settings['popupMessagesEnabled'] as bool?) ?? true;
+    final soundEnabled = (settings['soundEffectsEnabled'] as bool?) ?? true;
+    final vibrationEnabled = (settings['vibrationEnabled'] as bool?) ?? true;
+    final reducedMotion = (settings['reducedMotion'] as bool?) ?? false;
+
+    if (!notificationsEnabled || !popupsEnabled || _isWithinQuietHours(settings)) {
+      return;
+    }
+
+    if (soundEnabled) {
+      await SystemSound.play(SystemSoundType.click);
+    }
+    if (vibrationEnabled) {
+      HapticFeedback.mediumImpact();
+    }
+
     await showGeneralDialog(
       context: context,
       barrierDismissible: true,
       barrierLabel: '',
       barrierColor: Colors.black87,
-      transitionDuration: const Duration(milliseconds: 300),
-      transitionBuilder: (ctx, anim, _, child) => FadeTransition(
-        opacity: CurvedAnimation(parent: anim, curve: Curves.easeOut),
-        child: ScaleTransition(
+      transitionDuration: Duration(milliseconds: reducedMotion ? 120 : 300),
+      transitionBuilder: (ctx, anim, _, child) {
+        final fade = FadeTransition(
+          opacity: CurvedAnimation(parent: anim, curve: Curves.easeOut),
+          child: child,
+        );
+        if (reducedMotion) return fade;
+        return ScaleTransition(
           scale: Tween<double>(begin: 0.88, end: 1.0)
               .animate(CurvedAnimation(parent: anim, curve: Curves.easeOutBack)),
-          child: child,
-        ),
-      ),
+          child: fade,
+        );
+      },
       pageBuilder: (ctx, _, __) => _SystemDialog(
         type: type, title: title, message: message, subMessage: subMessage,
       ),

@@ -19,8 +19,35 @@ class QuestService {
 
   // ── Difficulty multiplier ──────────────────────────────────────────────────
   double _multiplier(UserModel user) {
+    final settings = _storage.getAppSettings();
+    final adaptiveEnabled = (settings['adaptiveDifficultyEnabled'] as bool?) ?? true;
     final base = 1.0 + ((user.level - 1) * 0.04);
-    return (base + user.difficultyModifier).clamp(0.7, 4.0);
+    final modifier = adaptiveEnabled ? user.difficultyModifier : 0.0;
+    return (base + modifier).clamp(0.7, 4.0);
+  }
+
+  QuestModel? _findActivePunishment(List<QuestModel> quests) {
+    for (final quest in quests) {
+      if (quest.isPunishment && !quest.completed) {
+        return quest;
+      }
+    }
+    return null;
+  }
+
+  String _punishmentTitle(Map<String, dynamic> q, int target) {
+    final kind = q['kind'] as String?;
+    final exercise = (q['exercise'] as String?) ?? (q['title'] as String?) ?? 'Punishment';
+
+    switch (kind) {
+      case 'timed':
+        return 'Punishment: $exercise $target SEC';
+      case 'distance':
+        return 'Punishment: Run $target KM';
+      case 'reps':
+      default:
+        return 'Punishment: $target $exercise';
+    }
   }
 
   Map<String, dynamic> _dailySystem() => _content.dailyMissionSystem;
@@ -210,14 +237,37 @@ class QuestService {
 
   // ── Punishment quest ───────────────────────────────────────────────────────
   QuestModel _generatePunishment(UserModel user) {
-    final pool = List<Map<String, dynamic>>.from(_content.punishmentQuests)..shuffle();
+    final settings = _storage.getAppSettings();
+    final allowedKinds = (settings['punishmentAllowedKinds'] as List?)
+            ?.map((e) => e.toString())
+            .toSet() ??
+        <String>{};
+    final highImpactEnabled = (settings['punishmentHighImpactEnabled'] as bool?) ?? true;
+
+    final basePool = List<Map<String, dynamic>>.from(_content.punishmentQuests);
+    final filteredPool = basePool.where((item) {
+      if (allowedKinds.isEmpty) return true;
+      final kind = (item['kind'] as String?) ?? 'reps';
+      if (!highImpactEnabled && kind == 'distance') return false;
+      return allowedKinds.contains(kind);
+    }).toList();
+
+    final pool = (filteredPool.isEmpty ? basePool : filteredPool)..shuffle();
     final q = pool.first;
-    double multi = _multiplier(user) * 1.5;
+
+    final intensity = (settings['punishmentIntensity'] as String?) ?? 'standard';
+    double intensityMulti = 1.5;
+    if (intensity == 'low') intensityMulti = 1.2;
+    if (intensity == 'hard') intensityMulti = 1.9;
+
+    double multi = _multiplier(user) * intensityMulti;
     if (user.skillPath == 2) multi *= 1.5; // Discipline path extra harsh
+    final baseTarget = (q['baseTarget'] as num?)?.toDouble() ?? 0;
+    final target = (baseTarget * multi).round();
 
     return QuestModel(
-      title: q['title'] as String,
-      target: ((q['baseTarget'] as int) * multi).round(),
+      title: _punishmentTitle(q, target),
+      target: target,
       category: q['category'] as String,
       difficulty: 'punishment',
       isPunishment: true,
@@ -315,9 +365,13 @@ class QuestService {
     // ── Generate new quests ───────────────────────────────────────────────
     user.doubleExpToday = false;
     final newQuests = <QuestModel>[];
+    final activePunishment = _findActivePunishment(quests);
 
-    // Punishment first
-    if (user.hasPendingPunishment) {
+    // Keep an active punishment on the board until it is completed.
+    if (activePunishment != null) {
+      newQuests.add(activePunishment);
+      user.hasPendingPunishment = false;
+    } else if (user.hasPendingPunishment) {
       newQuests.add(_generatePunishment(user));
       user.hasPendingPunishment = false;
       hadPunishment = true;
@@ -404,6 +458,13 @@ class QuestService {
     user.titleId = _titleSvc.evaluateTitle(user);
     await _storage.saveUser(user);
 
+    if (quest.isPunishment) {
+      final remaining = _storage.getQuests().where((item) {
+        return !(item.isPunishment && item.completed);
+      }).toList();
+      await _storage.saveQuests(remaining);
+    }
+
     final freshQuests = _storage.getQuests();
     final allCompleted = freshQuests.every((q) => q.completed);
 
@@ -424,6 +485,13 @@ class QuestService {
   }
 
   int _isoWeek(DateTime date) {
+    final settings = _storage.getAppSettings();
+    final weekStartsMonday = (settings['weekStartsMonday'] as bool?) ?? true;
+    if (!weekStartsMonday) {
+      final dayOfYear = date.difference(DateTime(date.year, 1, 1)).inDays + 1;
+      final sundayWeekday = date.weekday % 7;
+      return ((dayOfYear - sundayWeekday + 10) / 7).floor();
+    }
     final dayOfYear = date.difference(DateTime(date.year, 1, 1)).inDays + 1;
     return ((dayOfYear - date.weekday + 10) / 7).floor();
   }

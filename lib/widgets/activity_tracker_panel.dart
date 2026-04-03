@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../core/app_colors.dart';
 import '../services/activity_tracking_service.dart';
+import '../services/storage_service.dart';
+import '../services/settings_view_service.dart';
 
 class ActivityTrackerPanel extends StatefulWidget {
   const ActivityTrackerPanel({super.key});
@@ -13,8 +15,21 @@ class ActivityTrackerPanel extends StatefulWidget {
 
 class _ActivityTrackerPanelState extends State<ActivityTrackerPanel> {
   final ActivityTrackingService _service = ActivityTrackingService.instance;
+  final StorageService _storage = StorageService();
   bool _busy = false;
   bool _enabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final autoStart = (_storage.getAppSettings()['trackerAutoStart'] as bool?) ?? false;
+      if (!autoStart || !mounted) return;
+      final started = await _service.start();
+      if (!mounted) return;
+      setState(() => _enabled = started);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +37,17 @@ class _ActivityTrackerPanelState extends State<ActivityTrackerPanel> {
       stream: _service.stream,
       initialData: ActivitySnapshot.idle(),
       builder: (context, snapshot) {
+        final settings = _storage.getAppSettings();
+        final compactCards = (settings['compactCards'] as bool?) ?? false;
         final data = snapshot.data ?? ActivitySnapshot.idle();
         final isEnabled = _enabled || data.isTracking;
-        final pace = data.paceMinutesPerKm == null
-            ? '--'
-            : '${data.paceMinutesPerKm!.toStringAsFixed(1)} min/km';
+        final pace = SettingsViewService.paceLabel(data.paceMinutesPerKm);
+        final distance = SettingsViewService.distanceDisplayValue(data.distanceMeters);
+        final distanceUnit = SettingsViewService.distanceUnitLabel();
 
         return Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(compactCards ? 12 : 16),
           decoration: BoxDecoration(
             color: AppColors.surface,
             border: Border.all(color: isEnabled ? AppColors.emerald.withValues(alpha: 0.4) : AppColors.cardBorder),
@@ -85,10 +102,10 @@ class _ActivityTrackerPanelState extends State<ActivityTrackerPanel> {
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: 2.2,
+                childAspectRatio: compactCards ? 2.5 : 2.2,
                 children: [
                   _metric('STEPS', '${data.steps}'),
-                  _metric('DISTANCE', '${(data.distanceMeters / 1000).toStringAsFixed(2)} km'),
+                  _metric('DISTANCE', '${distance.toStringAsFixed(2)} $distanceUnit'),
                   _metric('PACE', pace),
                   _metric('ELEVATION', '${data.elevationGainMeters.toStringAsFixed(0)} m'),
                 ],
