@@ -51,6 +51,23 @@ flutter clean
 - App content is loaded from `assets/data/`.
 - Activity tracking works best on Android devices with required permissions enabled.
 
+## Landing Page (Vercel)
+
+A simple web landing page is available in `landing-page/`.
+
+To deploy it on Vercel:
+
+1. Import this repository in Vercel.
+2. In Project Settings, set Root Directory to `landing-page`.
+3. Deploy (no build command required for this static site).
+
+If you use Vercel CLI:
+
+```bash
+cd landing-page
+vercel
+```
+
 ## License
 
 No license file is currently included.

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aika Ascend | Gamified Fitness</title>
+  <meta name="description" content="Aika Ascend turns fitness into a quest system with challenges, progress, and achievement unlocks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-violet" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-cyan" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-emerald" aria-hidden="true"></div>
+  <div class="neon-rails" aria-hidden="true">
+    <span class="rail rail-left"></span>
+    <span class="rail rail-right"></span>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">AIKA ASCEND</div>
+      <nav class="nav-links">
+        <a href="#features">Modules</a>
+        <a href="#flow">Flow</a>
+        <a href="#download">Deploy</a>
+      </nav>
+      <a class="button button-ghost" href="#download">SYSTEM PANEL</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-layout">
+        <div>
+          <p class="eyebrow">HUNTER TRAINING INTERFACE</p>
+          <h1>TURN DAILY MOVEMENT INTO RANK PROGRESSION.</h1>
+          <p class="subtitle">
+            A web landing page designed to mirror your app identity: mission-driven,
+            stat-focused, and built around momentum.
+          </p>
+          <div class="status-strip" aria-label="App stats preview">
+            <span>QUESTS: ACTIVE</span>
+            <span>TRACKING: ONLINE</span>
+            <span>RANK: ASCENDING</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#download">START ASCENSION</a>
+            <a class="button button-ghost" href="#features">VIEW MODULES</a>
+          </div>
+        </div>
+
+        <aside class="system-panel" aria-label="System preview panel">
+          <p class="panel-title">LIVE SYSTEM PREVIEW</p>
+          <div class="panel-screen">
+            <div class="scanline"></div>
+            <p class="panel-rank">RANK STATUS: E-CANDIDATE</p>
+            <div class="panel-bars">
+              <label>DISCIPLINE</label>
+              <div><span style="width:74%"></span></div>
+              <label>ENDURANCE</label>
+              <div><span style="width:58%"></span></div>
+              <label>STREAK</label>
+              <div><span style="width:88%"></span></div>
+            </div>
+            <div class="panel-footer">
+              <span>XP TODAY: +420</span>
+              <span>TARGET: QUEST CLEAR</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="container metrics" aria-label="Highlights">
+      <article>
+        <p>01</p>
+        <h3>QUEST-CENTERED UX</h3>
+      </article>
+      <article>
+        <p>02</p>
+        <h3>REAL MOVEMENT METRICS</h3>
+      </article>
+      <article>
+        <p>03</p>
+        <h3>ACHIEVEMENT FEEDBACK LOOP</h3>
+      </article>
+    </section>
+
+    <section id="features" class="container section">
+      <h2>SYSTEM MODULES</h2>
+      <div class="grid">
+        <article class="card">
+          <p class="card-tag">CORE LOOP</p>
+          <h3>DAILY QUESTS</h3>
+          <p>Structured objectives for consistency, XP gain, and momentum building.</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">TRACKER</p>
+          <h3>ACTIVITY DATA</h3>
+          <p>Steps, movement state, distance, elevation, and active minutes in one flow.</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">EVENT</p>
+          <h3>CHALLENGES</h3>
+          <p>Timed missions that push discipline and create measurable progress streaks.</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">REWARD</p>
+          <h3>ACHIEVEMENTS</h3>
+          <p>Unlock titles, rarity tiers, and milestones tied to real-world consistency.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="flow" class="container section flow">
+      <h2>USER PROGRESSION FLOW</h2>
+      <div class="flow-grid">
+        <article>
+          <p>STEP 1</p>
+          <h3>Accept Daily Quest</h3>
+          <span>Open app, sync goals, and initialize tracking.</span>
+        </article>
+        <article>
+          <p>STEP 2</p>
+          <h3>Execute Training</h3>
+          <span>Movement data updates in real time as activity increases.</span>
+        </article>
+        <article>
+          <p>STEP 3</p>
+          <h3>Collect Rewards</h3>
+          <span>XP, badges, and progression milestones are unlocked.</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="download" class="container section cta">
+      <h2>READY TO DEPLOY THIS SYSTEM ONLINE?</h2>
+      <p>Use this page as your official entry point and provide a direct Android APK download.</p>
+      <div class="hero-actions">
+        <a
+          class="button button-primary"
+          href="./downloads/aika-ascend-latest.apk"
+          download
+          aria-label="Direct APK Download"
+        >
+          DOWNLOAD APK DIRECTLY
+        </a>
+      </div>
+      <p class="download-note">Replace <strong>landing-page/downloads/aika-ascend-latest.apk</strong> with your real release file.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© 2026 AIKA ASCEND</p>
+      <p>BUILT FOR DISCIPLINE, CONSISTENCY, AND PROGRESSION.</p>
+    </div>
+  </footer>
+</body>
+</html>
