@@ -1,6 +1,5 @@
 {
   "cleanUrls": true,
-  "public": ".",
   "rewrites": [
     {
       "source": "/downloads/(.*)",
