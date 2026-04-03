@@ -1,0 +1,223 @@
+{
+  "strength_quests": [
+    {"title": "Push-ups", "baseTarget": 20, "category": "strength", "isTimedQuest": false},
+    {"title": "Diamond Push-ups", "baseTarget": 15, "category": "strength", "isTimedQuest": false},
+    {"title": "Squats", "baseTarget": 30, "category": "strength", "isTimedQuest": false},
+    {"title": "Lunges", "baseTarget": 20, "category": "strength", "isTimedQuest": false},
+    {"title": "Sit-ups", "baseTarget": 25, "category": "strength", "isTimedQuest": false},
+    {"title": "Dips", "baseTarget": 15, "category": "strength", "isTimedQuest": false},
+    {"title": "Pike Push-ups", "baseTarget": 12, "category": "strength", "isTimedQuest": false}
+  ],
+  "cardio_quests": [
+    {"title": "Jumping Jacks", "baseTarget": 40, "category": "cardio", "isTimedQuest": false},
+    {"title": "Mountain Climbers", "baseTarget": 30, "category": "cardio", "isTimedQuest": false},
+    {"title": "High Knees", "baseTarget": 50, "category": "cardio", "isTimedQuest": false},
+    {"title": "Burpees", "baseTarget": 15, "category": "cardio", "isTimedQuest": false},
+    {"title": "Jump Rope", "baseTarget": 60, "category": "cardio", "isTimedQuest": false},
+    {"title": "Box Step-ups", "baseTarget": 20, "category": "cardio", "isTimedQuest": false}
+  ],
+  "discipline_quests": [
+    {"title": "Plank Hold", "baseTarget": 60, "category": "discipline", "isTimedQuest": true},
+    {"title": "Wall Sit", "baseTarget": 45, "category": "discipline", "isTimedQuest": true},
+    {"title": "Dead Hang", "baseTarget": 30, "category": "discipline", "isTimedQuest": true},
+    {"title": "L-Sit Hold", "baseTarget": 20, "category": "discipline", "isTimedQuest": true}
+  ],
+  "punishment_quests": [
+    {"title": "Punishment: Burpee Gauntlet", "baseTarget": 30, "category": "cardio", "isTimedQuest": false},
+    {"title": "Punishment: Squat Hold", "baseTarget": 90, "category": "discipline", "isTimedQuest": true},
+    {"title": "Punishment: Push-up Grind", "baseTarget": 40, "category": "strength", "isTimedQuest": false}
+  ],
+  "boss_quest_title": "BOSS RAID: Total Annihilation",
+  "titles": [
+    {"id": 0, "name": "Awakened", "desc": "Your journey begins."},
+    {"id": 1, "name": "Disciplined", "desc": "3-day streak achieved."},
+    {"id": 2, "name": "Iron Will", "desc": "7-day streak achieved."},
+    {"id": 3, "name": "Unbreakable", "desc": "14-day streak achieved."},
+    {"id": 4, "name": "Obsessed", "desc": "30-day streak achieved."},
+    {"id": 5, "name": "Ascendant", "desc": "Reached Level 20."},
+    {"id": 6, "name": "Dragon Slayer", "desc": "Defeated a Boss raid."},
+    {"id": 7, "name": "Survivor", "desc": "Completed 5 punishment quests."},
+    {"id": 8, "name": "Redeemed", "desc": "Recovered from failure."},
+    {"id": 9, "name": "Warlord", "desc": "Reached Level 50."},
+    {"id": 10, "name": "Shadow Monarch", "desc": "Reached Level 50 and defeated a Boss."},
+    {"id": 11, "name": "Failure", "desc": "3+ consecutive missed days."}
+  ],
+  "skill_paths": [
+    {
+      "id": 0,
+      "name": "Strength",
+      "badge": "STR",
+      "desc": "Raw power. More resistance training, heavier loads.",
+      "bonus": "+15% EXP from strength quests"
+    },
+    {
+      "id": 1,
+      "name": "Endurance",
+      "badge": "END",
+      "desc": "Stamina and cardio dominance. Streak bonuses doubled.",
+      "bonus": "2× streak bonus EXP"
+    },
+    {
+      "id": 2,
+      "name": "Discipline",
+      "badge": "DIS",
+      "desc": "The hardest path. Severe punishments, maximum rewards.",
+      "bonus": "+25% EXP all quests"
+    }
+  ],
+  "challenge_categories": [
+    {
+      "id": "strength",
+      "name": "Strength Trials",
+      "badge": "STR",
+      "color": "crimson",
+      "items": ["Push-ups", "Dips", "Squats", "Lunges", "Pike Push-ups"]
+    },
+    {
+      "id": "cardio",
+      "name": "Endurance Trials",
+      "badge": "END",
+      "color": "cyan",
+      "items": ["Burpees", "Jump Rope", "Mountain Climbers", "High Knees", "Jumping Jacks"]
+    },
+    {
+      "id": "discipline",
+      "name": "Discipline Trials",
+      "badge": "DIS",
+      "color": "violet",
+      "items": ["Plank Hold", "Wall Sit", "Dead Hang", "L-Sit Hold"]
+    }
+  ],
+  "boss_challenges": [
+    {
+      "title": "Boss Raid I: Shadow Beast",
+      "desc": "Complete 3 trials in a row without skipping a set.",
+      "difficulty": "BOSS",
+      "target": 3,
+      "exp": 300
+    },
+    {
+      "title": "Boss Raid II: Iron Monarch",
+      "desc": "Finish a full strength + cardio circuit.",
+      "difficulty": "BOSS",
+      "target": 1,
+      "exp": 450
+    },
+    {
+      "title": "Boss Raid III: Final Gate",
+      "desc": "Clear the week with zero missed days.",
+      "difficulty": "BOSS",
+      "target": 7,
+      "exp": 600
+    }
+  ],
+  "interactive_workouts": [
+    {
+      "id": "wk_strength_60",
+      "title": "60-Minute Strength Builder",
+      "duration_minutes": 60,
+      "focus": "Upper body + core",
+      "exercises": [
+        {"name": "Push-ups", "target_muscles": "Chest, shoulders, triceps", "sets": 4, "reps": "12-15", "rest_seconds": 60},
+        {"name": "Dips", "target_muscles": "Triceps, chest", "sets": 4, "reps": "10-12", "rest_seconds": 60},
+        {"name": "Pike Push-ups", "target_muscles": "Shoulders, upper chest", "sets": 3, "reps": "8-10", "rest_seconds": 75},
+        {"name": "Plank Hold", "target_muscles": "Core", "sets": 3, "reps": "60 sec", "rest_seconds": 45}
+      ]
+    },
+    {
+      "id": "wk_endurance_60",
+      "title": "60-Minute Endurance Circuit",
+      "duration_minutes": 60,
+      "focus": "Cardio + stamina",
+      "exercises": [
+        {"name": "Jump Rope", "target_muscles": "Calves, shoulders, cardio", "sets": 5, "reps": "2 min", "rest_seconds": 45},
+        {"name": "Burpees", "target_muscles": "Full body", "sets": 4, "reps": "12-15", "rest_seconds": 75},
+        {"name": "Mountain Climbers", "target_muscles": "Core, shoulders", "sets": 4, "reps": "40", "rest_seconds": 45},
+        {"name": "High Knees", "target_muscles": "Hip flexors, quads", "sets": 4, "reps": "60 sec", "rest_seconds": 45}
+      ]
+    },
+    {
+      "id": "wk_leg_core_60",
+      "title": "60-Minute Lower Body + Core",
+      "duration_minutes": 60,
+      "focus": "Leg strength and core stability",
+      "exercises": [
+        {"name": "Squats", "target_muscles": "Quads, glutes", "sets": 5, "reps": "15-20", "rest_seconds": 60},
+        {"name": "Lunges", "target_muscles": "Glutes, quads, hamstrings", "sets": 4, "reps": "12 each leg", "rest_seconds": 60},
+        {"name": "Wall Sit", "target_muscles": "Quads, glutes", "sets": 4, "reps": "60 sec", "rest_seconds": 60},
+        {"name": "Sit-ups", "target_muscles": "Abs", "sets": 4, "reps": "20", "rest_seconds": 45}
+      ]
+    }
+  ],
+  "transformation_30_day": {
+    "title": "30-Day Transformation Challenge",
+    "desc": "Submit your current weight and progress photos to build a before/after timeline.",
+    "checkin_frequency": "Daily",
+    "required_fields": ["weight", "photo"],
+    "milestones": [7, 14, 21, 30]
+  },
+  "daily_challenge_prompts": [
+    "Hit all planned sets today.",
+    "Drink at least 2L of water.",
+    "Walk 8,000+ steps.",
+    "Sleep at least 7 hours.",
+    "Take a progress photo and log your weight."
+  ],
+  "daily_mission_system": {
+    "title": "SYSTEM DAILY QUEST",
+    "subtitle": "Complete all missions before midnight.",
+    "failure": "Failure will trigger a penalty quest.",
+    "tiers": [
+      {
+        "id": "beginner",
+        "name": "Beginner",
+        "maxLevel": 4,
+        "targetScale": 0.55,
+        "quests": [
+          {"title": "Push-up Trial", "baseTarget": 5, "category": "strength", "isTimedQuest": false},
+          {"title": "Squat Trial", "baseTarget": 10, "category": "strength", "isTimedQuest": false},
+          {"title": "Walk Trial", "baseTarget": 800, "category": "cardio", "isTimedQuest": false},
+          {"title": "Plank Trial", "baseTarget": 20, "category": "discipline", "isTimedQuest": true}
+        ]
+      },
+      {
+        "id": "standard",
+        "name": "Hunter",
+        "maxLevel": 19,
+        "targetScale": 1.0,
+        "quests": [
+          {"title": "Push-up Trial", "baseTarget": 12, "category": "strength", "isTimedQuest": false},
+          {"title": "Squat Trial", "baseTarget": 25, "category": "strength", "isTimedQuest": false},
+          {"title": "Run Trial", "baseTarget": 1500, "category": "cardio", "isTimedQuest": false},
+          {"title": "Plank Trial", "baseTarget": 45, "category": "discipline", "isTimedQuest": true}
+        ]
+      },
+      {
+        "id": "advanced",
+        "name": "Elite",
+        "maxLevel": 999,
+        "targetScale": 1.4,
+        "quests": [
+          {"title": "Push-up Trial", "baseTarget": 20, "category": "strength", "isTimedQuest": false},
+          {"title": "Squat Trial", "baseTarget": 40, "category": "strength", "isTimedQuest": false},
+          {"title": "Run Trial", "baseTarget": 3000, "category": "cardio", "isTimedQuest": false},
+          {"title": "Plank Trial", "baseTarget": 60, "category": "discipline", "isTimedQuest": true}
+        ]
+      }
+    ]
+  },
+  "achievements": [
+    {"id": "first_blood", "title": "First Blood", "desc": "Complete your first quest.", "rarity": "common"},
+    {"id": "path_chosen", "title": "Path Chosen", "desc": "Select your skill path.", "rarity": "common"},
+    {"id": "iron_start", "title": "Iron Start", "desc": "Achieve a 3-day streak.", "rarity": "common"},
+    {"id": "penalty_survivor", "title": "Penalty Survivor", "desc": "Complete a punishment quest.", "rarity": "uncommon"},
+    {"id": "unbroken", "title": "Unbroken", "desc": "Achieve a 7-day streak.", "rarity": "rare"},
+    {"id": "centurion", "title": "Centurion", "desc": "Reach Level 10.", "rarity": "rare"},
+    {"id": "hundred_quests", "title": "Quest Master", "desc": "Complete 100 total quests.", "rarity": "rare"},
+    {"id": "boss_slayer", "title": "Boss Slayer", "desc": "Defeat your first Boss raid.", "rarity": "epic"},
+    {"id": "perfect_week", "title": "Perfect Week", "desc": "7 consecutive days fully completed.", "rarity": "epic"},
+    {"id": "redeemed", "title": "Redeemed", "desc": "Clear the system lockout.", "rarity": "rare"},
+    {"id": "obsessed", "title": "Obsessed", "desc": "Achieve a 30-day streak.", "rarity": "legendary"},
+    {"id": "shadow_monarch", "title": "Shadow Monarch", "desc": "Reach Level 50.", "rarity": "legendary"}
+  ]
+}

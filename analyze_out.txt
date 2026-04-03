@@ -1,0 +1,197 @@
+﻿Analyzing lib...                                                
+
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\core\app_theme.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\core\app_theme.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:17:23 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:21:24 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:25:23 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:29:25 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:33:21 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:37:20 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:40:21 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:43:21 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:47:21 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:54:25 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:65:22 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\core\app_theme.dart:75:11 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\screens\achievements_screen.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\screens\achievements_screen.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\screens\achievements_screen.dart:42:51 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\achievements_screen.dart:46:62 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\achievements_screen.dart:61:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\achievements_screen.dart:140:42 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\achievements_screen.dart:150:36 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\achievements_screen.dart:160:36 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\achievements_screen.dart:172:38 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\screens\home_screen.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\screens\home_screen.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:122:46 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:207:42 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:211:44 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:227:37 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:266:26 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:273:26 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:291:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:313:16 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:363:36 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:367:38 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\home_screen.dart:387:58 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\screens\main_shell.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\screens\main_shell.dart:2:8 - uri_does_not_exist
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\screens\onboarding_screen.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\screens\onboarding_screen.dart:2:8 - uri_does_not_exist
+warning - The value of the field '_currentPage' isn't used - lib\screens\onboarding_screen.dart:20:7 - unused_field
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:80:40 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:84:51 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:91:20 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:106:22 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:113:28 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:149:41 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:153:51 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:160:20 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:212:40 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:222:40 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:229:40 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\onboarding_screen.dart:277:18 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\screens\profile_screen.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\screens\profile_screen.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:32:18 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:46:43 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:52:18 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:57:42 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:63:43 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:88:44 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:94:18 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:101:42 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:107:41 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:142:38 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:146:52 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:181:36 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:189:36 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:241:40 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:250:40 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:262:36 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:290:28 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\profile_screen.dart:307:16 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\screens\splash_screen.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\screens\splash_screen.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\screens\splash_screen.dart:135:36 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\splash_screen.dart:144:36 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\splash_screen.dart:173:44 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\splash_screen.dart:183:44 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\screens\stats_screen.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\screens\stats_screen.dart:2:8 - uri_does_not_exist
+   info - The imported package 'fl_chart' isn't a dependency of the importing package - lib\screens\stats_screen.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:fl_chart/fl_chart.dart' - lib\screens\stats_screen.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:26:41 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:30:61 - undefined_identifier
+  error - The method 'BarChart' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:67:26 - undefined_method
+  error - The method 'BarChartData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:68:21 - undefined_method
+  error - The method 'FlBorderData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:70:35 - undefined_method
+  error - The method 'FlGridData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:71:33 - undefined_method
+  error - The method 'FlLine' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:74:58 - undefined_method
+  error - The method 'FlTitlesData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:80:35 - undefined_method
+  error - The method 'AxisTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:82:37 - undefined_method
+  error - The method 'SideTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:83:39 - undefined_method
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:88:38 - undefined_identifier
+  error - The method 'AxisTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:94:39 - undefined_method
+  error - The method 'SideTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:95:39 - undefined_method
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:103:40 - undefined_identifier
+  error - The name 'AxisTitles' isn't a class - lib\screens\stats_screen.dart:110:42 - creation_with_non_type
+  error - The method 'SideTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:110:65 - undefined_method
+  error - The name 'AxisTitles' isn't a class - lib\screens\stats_screen.dart:111:44 - creation_with_non_type
+  error - The method 'SideTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:111:67 - undefined_method
+  error - The method 'BarChartGroupData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:114:32 - undefined_method
+  error - The method 'BarChartRodData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:117:29 - undefined_method
+  error - The method 'LineChart' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:147:26 - undefined_method
+  error - The method 'LineChartData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:148:21 - undefined_method
+  error - The method 'FlBorderData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:150:35 - undefined_method
+  error - The method 'FlGridData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:151:33 - undefined_method
+  error - The method 'FlLine' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:154:58 - undefined_method
+  error - The method 'FlTitlesData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:160:35 - undefined_method
+  error - The method 'AxisTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:161:37 - undefined_method
+  error - The method 'SideTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:162:39 - undefined_method
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:167:38 - undefined_identifier
+  error - The name 'AxisTitles' isn't a class - lib\screens\stats_screen.dart:173:45 - creation_with_non_type
+  error - The method 'SideTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:174:39 - undefined_method
+  error - The name 'AxisTitles' isn't a class - lib\screens\stats_screen.dart:176:42 - creation_with_non_type
+  error - The method 'SideTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:176:65 - undefined_method
+  error - The name 'AxisTitles' isn't a class - lib\screens\stats_screen.dart:177:44 - creation_with_non_type
+  error - The method 'SideTitles' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:177:67 - undefined_method
+  error - The method 'LineChartBarData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:180:25 - undefined_method
+  error - The method 'FlSpot' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:182:31 - undefined_method
+  error - The method 'FlDotData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:186:36 - undefined_method
+  error - The method 'FlDotCirclePainter' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:188:33 - undefined_method
+  error - The method 'BarAreaData' isn't defined for the type 'StatsScreen' - lib\screens\stats_screen.dart:190:41 - undefined_method
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:218:28 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:243:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:256:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:264:32 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:295:34 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:301:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\screens\stats_screen.dart:310:30 - undefined_identifier
+warning - The declaration '_today' isn't referenced - lib\services\achievement_service.dart:8:10 - unused_element
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\services\system_service.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\services\system_service.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\services\system_service.dart:241:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\services\system_service.dart:246:42 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\services\system_service.dart:262:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\services\system_service.dart:271:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\services\system_service.dart:281:32 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\services\system_service.dart:300:34 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\widgets\countdown_widget.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\widgets\countdown_widget.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\widgets\countdown_widget.dart:71:20 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\countdown_widget.dart:77:20 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\widgets\exp_bar.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\widgets\exp_bar.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\widgets\exp_bar.dart:68:24 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\exp_bar.dart:74:24 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\exp_bar.dart:120:24 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\exp_bar.dart:135:28 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\widgets\level_up_overlay.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\widgets\level_up_overlay.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\widgets\level_up_overlay.dart:110:34 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\level_up_overlay.dart:121:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\level_up_overlay.dart:131:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\level_up_overlay.dart:141:30 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\level_up_overlay.dart:152:32 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\widgets\progress_ring.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\widgets\progress_ring.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\widgets\progress_ring.dart:81:26 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\progress_ring.dart:90:28 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\widgets\quest_card.dart:4:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\widgets\quest_card.dart:4:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\widgets\quest_card.dart:155:20 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\quest_card.dart:179:20 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\quest_card.dart:205:18 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\quest_card.dart:224:18 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\quest_card.dart:231:18 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\quest_card.dart:248:24 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\quest_card.dart:267:20 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\quest_card.dart:322:18 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\widgets\system_panel.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\widgets\system_panel.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\widgets\system_panel.dart:59:26 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\widgets\title_badge.dart:2:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\widgets\title_badge.dart:2:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\widgets\title_badge.dart:38:20 - undefined_identifier
+  error - Undefined name 'GoogleFonts' - lib\widgets\title_badge.dart:64:20 - undefined_identifier
+   info - The imported package 'google_fonts' isn't a dependency of the importing package - lib\widgets\typing_text.dart:3:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:google_fonts/google_fonts.dart' - lib\widgets\typing_text.dart:3:8 - uri_does_not_exist
+  error - Undefined name 'GoogleFonts' - lib\widgets\typing_text.dart:70:9 - undefined_identifier
+
+flutter : 180 issues found. (ran 
+in 5.9s)
+At line:1 char:1
++ flutter analyze lib/ 2>&1 | 
+Out-File -FilePath 
+"C:\Users\johna\OneDri ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : 
+NotSpec    ified: (180 issues 
+found. (ran in     5.9s):String) 
+[], RemoteExceptio    n
+    + FullyQualifiedErrorId : 
+NativeC    ommandError
+ 
