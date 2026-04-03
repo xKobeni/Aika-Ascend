@@ -1,6 +1,11 @@
 {
   "cleanUrls": true,
+  "public": ".",
   "rewrites": [
+    {
+      "source": "/downloads/(.*)",
+      "destination": "/downloads/$1"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
